@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #div1 {
+        width: 400px;
+        height: 220px;
+        border: 2px solid black;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    </style>
+    <script>
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+
+      function drag(ev) {
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+      }
+
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text/plain");
+        var draggedElement = document.getElementById(data);
+
+        if (draggedElement) {
+          // Clone the dragged element for the drop area
+          var clone = draggedElement.cloneNode(true);
+          clone.id = data + "-" + Date.now(); // Unique ID for the clone
+          ev.target.appendChild(clone);
+        } else {
+          console.error("Element not found:", data);
+        }
+      }
+      function hide(e) {
+        e.target.style.display = "hidden";
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Drag and Drop the Image or Text</h2>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <!-- Drop area -->
+    </div>
+    <img
+      id="drag1"
+      src="image.jpg"
+      draggable="true"
+      ondragstart="drag(event)"
+      width="336"
+      height="200"
+    />
+    <p
+      id="drag2"
+      draggable="true"
+      ondragstart="drag(event)"
+      ondragend="hide(event)"
+    >
+      HTML
+    </p>
+  </body>
+</html>
