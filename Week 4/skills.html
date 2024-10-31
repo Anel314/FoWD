@@ -4,7 +4,7 @@
     <style>
       #div1 {
         width: 400px;
-        height: 220px;
+        height: 300px;
         border: 2px solid black;
         margin-top: 20px;
         margin-bottom: 20px;
@@ -29,10 +29,11 @@
         var draggedElement = document.getElementById(data);
 
         if (draggedElement) {
-          // Clone the dragged element for the drop area
+          // Clone the dragged element for the drop area]
           var clone = draggedElement.cloneNode(true);
           clone.id = data + "-" + Date.now(); // Unique ID for the clone
           ev.target.appendChild(clone);
+          draggedElement.style.display = "none";
         } else {
           console.error("Element not found:", data);
         }

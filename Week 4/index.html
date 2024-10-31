@@ -312,13 +312,16 @@
         <label for="lastname">lastname:</label><br />
         <input type="text" name="lastname" id="lastname" /><br /><br />
 
-        <label for="job">Jo Title:</label><br />
+        <label for="job">Job Title:</label><br />
         <input type="text" name="job" id="job" />
         <button>Submit:</button>
       </fieldset>
     </form>
 
     <hr />
+    <h1>Where are you at?</h1>
+    <button onclick="getLocation()">Get My Location</button>
+    <p id="locationn"></p>
 
     <hr />
     <footer>
@@ -348,6 +351,44 @@
           )}, are you working as a ${sessionStorage.getItem("job_title")} `
         );
       });
+    </script>
+
+    <script>
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+          document.getElementById("locationn").innerText =
+            "Geolocation is not supported by this browser.";
+        }
+      }
+
+      function showPosition(position) {
+        document.getElementById(
+          "locationn"
+        ).innerText = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+      }
+
+      function showError(error) {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            document.getElementById("locationn").innerText =
+              "User denied the request for Geolocation.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            document.getElementById("locationn").innerText =
+              "Location information is unavailable.";
+            break;
+          case error.TIMEOUT:
+            document.getElementById("locationn").innerText =
+              "The request to get user location timed out.";
+            break;
+          case error.UNKNOWN_ERROR:
+            document.getElementById("locationn").innerText =
+              "An unknown error occurred.";
+            break;
+        }
+      }
     </script>
   </body>
 </html>
