@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" /><br />
+      <label for="password">password:</label>
+      <input type="text" name="password" id="password" /><br />
+      <button type="submit">Submit</button>
+      <label for="timer" id="timer"></label>
+    </form>
+
+    <script>
+      const form = document.querySelector("form");
+      const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const timerLabel = document.querySelector("#timer");
+
+        const updateLabel = (sec) => {
+          timerLabel.innerHTML = sec;
+        };
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>JS Routing</title>
+  </head>
+
+  <body>
+    <!--First example, simple client side routing-->
+    <button onclick="router('/')">Home page</button>
+    <button onclick="router('/login')">Login</button>
+
+    <div id="root"></div>
+
+    <script>
+      const routes = [
+        {
+          path: "/",
+          template: "<h1>This is the Homepage</h1>",
+        },
+        {
+          path: "/login",
+          template: `<form action=""> <label for="name">Name:</label><br /> <input type="text" /><br /> <label for="password">Password:</label><br /> <input type="password" /><br /> <label for="">No account? </label> <button onclick="router('/create')">Create one!</button> </form>`,
+        },
+        {
+          path: "/create",
+          template: ` <form action="" style="display: block"> <label for="name">Name:</label> <input type="text" name="" id="" /><br /> <label for="password">Password: </label> <input type="password" name="" id="" /><br /> <label for="repeat_password">Repeat Password: </label> <input type="password" name="" id="" /><br /> <label for="">Already have an account? </label> <button onclick="router('/login')">Click Here to Login!</button> </form>`,
+        },
+        {
+          path: "/Week%2011/sample.html",
+          template: "<h1>This is the Homepage</h1>",
+        },
+      ];
+
+      const router = (path) => {
+        window.history.pushState({}, " ", path);
+
+        routes.forEach((route) => {
+          if (route.path === path) {
+            document.getElementById("root").innerHTML = route.template;
+          }
+        });
+      };
+
+      //window.router = router;
+    </script>
+  </body>
+</html>
